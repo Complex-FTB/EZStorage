@@ -36,6 +36,7 @@ public class GuiStorageCore extends GuiContainer {
 	private GuiTextField searchField;
 	private List<ItemGroup> filteredList;
 
+	@Override
 	public void initGui() {
 		super.initGui();
 		this.searchField = new GuiTextField(this.fontRendererObj, this.guiLeft+10, this.guiTop+6, 80, this.fontRendererObj.FONT_HEIGHT);
@@ -45,27 +46,28 @@ public class GuiStorageCore extends GuiContainer {
 		this.searchField.setCanLoseFocus(true);
 		this.searchField.setFocused(true);
 		this.searchField.setText("");
-		this.filteredList = new ArrayList(this.tileEntity.inventory.inventory);
+		this.filteredList = new ArrayList<ItemGroup>(this.tileEntity.inventory.inventory);
 	}
 
-	public GuiStorageCore(EntityPlayer player, World world, int x, int y, int z) {
+	public GuiStorageCore(final EntityPlayer player, final World world, final int x, final int y, final int z) {
 		super(new ContainerStorageCore(player, world, x, y, z));
-		this.tileEntity = ((TileEntityStorageCore) world.getTileEntity(x, y, z));
+		this.tileEntity = (TileEntityStorageCore) world.getTileEntity(x, y, z);
 		this.xSize = 195;
 		this.ySize = 222;
 	}
 
-	public GuiStorageCore(ContainerStorageCore containerStorageCore, World world, int x, int y, int z) {
+	public GuiStorageCore(final ContainerStorageCore containerStorageCore, final World world, final int x, final int y, final int z) {
 		super(containerStorageCore);
-		this.tileEntity = ((TileEntityStorageCore) world.getTileEntity(x, y, z));
+		this.tileEntity = (TileEntityStorageCore) world.getTileEntity(x, y, z);
 		this.xSize = 195;
 		this.ySize = 222;
 	}
 
-	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
+	@Override
+	protected void drawGuiContainerBackgroundLayer(final float partialTicks, final int mouseX, final int mouseY) {
 		this.mc.renderEngine.bindTexture(getBackground());
-		int x = (this.width-this.xSize)/2;
-		int y = (this.height-this.ySize)/2;
+		final int x = (this.width-this.xSize)/2;
+		final int y = (this.height-this.ySize)/2;
 		drawTexturedModalRect(x, y, 0, 0, this.xSize, this.ySize);
 		this.searchField.setVisible(this.tileEntity.hasSearchBox);
 		if (this.tileEntity.hasSearchBox) {
@@ -75,7 +77,8 @@ public class GuiStorageCore extends GuiContainer {
 		}
 	}
 
-	protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
+	@Override
+	protected void drawGuiContainerForegroundLayer(final int mouseX, final int mouseY) {
 		super.drawGuiContainerForegroundLayer(mouseX, mouseY);
 		handleScrolling(mouseX, mouseY);
 		updateFilteredItems();
@@ -86,9 +89,8 @@ public class GuiStorageCore extends GuiContainer {
 
 		this.zLevel = 200.0F;
 		itemRender.zLevel = 200.0F;
-		if (this.ezRenderer==null) {
+		if (this.ezRenderer==null)
 			this.ezRenderer = new EZItemRenderer();
-		}
 
 		boolean finished = false;
 		for (int i = 0; i<rowsVisible(); i++) {
@@ -101,163 +103,152 @@ public class GuiStorageCore extends GuiContainer {
 					break;
 				}
 
-				ItemGroup group = (ItemGroup) this.filteredList.get(index);
-				ItemStack stack = group.itemStack;
+				final ItemGroup group = this.filteredList.get(index);
+				final ItemStack stack = group.itemStack;
 				FontRenderer font = null;
 				if (stack!=null)
 					font = stack.getItem().getFontRenderer(stack);
-				if (font==null) {
+				if (font==null)
 					font = this.fontRendererObj;
-				}
 
 				itemRender.renderItemAndEffectIntoGUI(font, this.mc.getTextureManager(), stack, x, y);
 				this.ezRenderer.renderItemOverlayIntoGUI(font, stack, x, y, ""+group.count);
 				x += 18;
 			}
-			if (finished) {
+			if (finished)
 				break;
-			}
 			y += 18;
 		}
 
-		int i1 = 175;
-		int k = 18;
-		int l = k+108;
+		final int i1 = 175;
+		final int k = 18;
+		final int l = k+108;
 		this.mc.getTextureManager().bindTexture(creativeInventoryTabs);
 		drawTexturedModalRect(i1, k+(int) ((l-k-17)*this.currentScroll), 232, 0, 12, 15);
 		this.zLevel = 0.0F;
 		itemRender.zLevel = 0.0F;
 	}
 
-	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+	@Override
+	public void drawScreen(final int mouseX, final int mouseY, final float partialTicks) {
 		super.drawScreen(mouseX, mouseY, partialTicks);
-		Integer slot = getSlotAt(mouseX, mouseY);
+		final Integer slot = getSlotAt(mouseX, mouseY);
 		if (slot!=null) {
 			int mode = 0;
-			if (GuiScreen.isShiftKeyDown()) {
+			if (GuiScreen.isShiftKeyDown())
 				mode = 1;
-			}
 			int index = this.tileEntity.inventory.slotCount();
 			if (slot.intValue()<this.filteredList.size()) {
-				ItemGroup group = (ItemGroup) this.filteredList.get(slot.intValue());
+				final ItemGroup group = this.filteredList.get(slot.intValue());
 				if (group!=null) {
 					index = this.tileEntity.inventory.inventory.indexOf(group);
-					if (index<0) {
+					if (index<0)
 						return;
-					}
 					renderToolTip(group.itemStack, mouseX, mouseY);
 				}
 			}
 		}
 	}
 
-	protected void keyTyped(char typedChar, int keyCode) {
-		if (!checkHotbarKeys(keyCode)) {
-			if ((this.tileEntity.hasSearchBox)&&(this.searchField.isFocused())&&(this.searchField.textboxKeyTyped(typedChar, keyCode))) {
+	@Override
+	protected void keyTyped(final char typedChar, final int keyCode) {
+		if (!checkHotbarKeys(keyCode))
+			if (this.tileEntity.hasSearchBox&&this.searchField.isFocused()&&this.searchField.textboxKeyTyped(typedChar, keyCode))
 				updateFilteredItems();
-			} else {
+			else
 				super.keyTyped(typedChar, keyCode);
-			}
-		}
 	}
 
 	private void updateFilteredItems() {
-		this.filteredList = new ArrayList(this.tileEntity.inventory.inventory);
-		Iterator iterator = this.filteredList.iterator();
-		String s1 = this.searchField.getText().toLowerCase();
+		this.filteredList = new ArrayList<ItemGroup>(this.tileEntity.inventory.inventory);
+		final Iterator<ItemGroup> iterator = this.filteredList.iterator();
+		final String s1 = this.searchField.getText().toLowerCase();
 
 		while (iterator.hasNext()) {
-			ItemGroup group = (ItemGroup) iterator.next();
-			ItemStack itemstack = group.itemStack;
+			final ItemGroup group = iterator.next();
+			final ItemStack itemstack = group.itemStack;
 			boolean flag = false;
-			Iterator iterator1 = itemstack.getTooltip(this.mc.thePlayer, this.mc.gameSettings.advancedItemTooltips).iterator();
+			final Iterator<?> iterator1 = itemstack.getTooltip(this.mc.thePlayer, this.mc.gameSettings.advancedItemTooltips).iterator();
 
 			while (iterator1.hasNext()) {
-				String s = (String) iterator1.next();
+				final String s = (String) iterator1.next();
 
-				if (EnumChatFormatting.getTextWithoutFormattingCodes(s).toLowerCase().contains(s1)) {
-
+				if (EnumChatFormatting.getTextWithoutFormattingCodes(s).toLowerCase().contains(s1))
 					flag = true;
-				}
 			}
-			if (!flag) {
+			if (!flag)
 				iterator.remove();
-			}
 		}
 	}
 
-	private void handleScrolling(int mouseX, int mouseY) {
-		boolean flag = Mouse.isButtonDown(0);
+	private void handleScrolling(final int mouseX, final int mouseY) {
+		final boolean flag = Mouse.isButtonDown(0);
 
-		int k = this.guiLeft;
-		int l = this.guiTop;
-		int i1 = k+175;
-		int j1 = l+18;
-		int k1 = i1+14;
-		int l1 = j1+108;
+		final int k = this.guiLeft;
+		final int l = this.guiTop;
+		final int i1 = k+175;
+		final int j1 = l+18;
+		final int k1 = i1+14;
+		final int l1 = j1+108;
 
-		if ((!this.wasClicking)&&(flag)&&(mouseX>=i1)&&(mouseY>=j1)&&(mouseX<k1)&&(mouseY<l1)) {
+		if (!this.wasClicking&&flag&&mouseX>=i1&&mouseY>=j1&&mouseX<k1&&mouseY<l1)
 			this.isScrolling = true;
-		}
 
-		if (!flag) {
+		if (!flag)
 			this.isScrolling = false;
-		}
 
 		this.wasClicking = flag;
 
 		if (this.isScrolling) {
-			this.currentScroll = ((mouseY-j1-7.5F)/(l1-j1-15.0F));
+			this.currentScroll = (mouseY-j1-7.5F)/(l1-j1-15.0F);
 			this.currentScroll = MathHelper.clamp_float(this.currentScroll, 0.0F, 1.0F);
 			scrollTo(this.currentScroll);
 		}
 	}
 
-	protected void mouseClicked(int mouseX, int mouseY, int mouseButton) {
-		Integer slot = getSlotAt(mouseX, mouseY);
+	@Override
+	protected void mouseClicked(final int mouseX, final int mouseY, final int mouseButton) {
+		final Integer slot = getSlotAt(mouseX, mouseY);
 		if (slot!=null) {
 			int mode = 0;
-			if (GuiScreen.isShiftKeyDown()) {
+			if (GuiScreen.isShiftKeyDown())
 				mode = 1;
-			}
 			int index = this.tileEntity.inventory.slotCount();
 			if (slot.intValue()<this.filteredList.size()) {
-				ItemGroup group = (ItemGroup) this.filteredList.get(slot.intValue());
+				final ItemGroup group = this.filteredList.get(slot.intValue());
 				if (group!=null) {
 					index = this.tileEntity.inventory.inventory.indexOf(group);
-					if (index<0) {
+					if (index<0)
 						return;
-					}
 				}
 			}
 			com.zerofall.ezstorage.EZStorage.networkWrapper.sendToServer(new MyMessage(index, mouseButton, mode));
-			ContainerStorageCore container = (ContainerStorageCore) this.inventorySlots;
+			final ContainerStorageCore container = (ContainerStorageCore) this.inventorySlots;
 			container.customSlotClick(index, mouseButton, mode, this.mc.thePlayer);
 		} else {
-			int elementX = this.searchField.xPosition;
-			int elementY = this.searchField.yPosition;
-			if ((mouseX>=elementX)&&(mouseX<=elementX+this.searchField.width)&&(mouseY>=elementY)&&(mouseY<=elementY+this.searchField.height)) {
+			final int elementX = this.searchField.xPosition;
+			final int elementY = this.searchField.yPosition;
+			if (mouseX>=elementX&&mouseX<=elementX+this.searchField.width&&mouseY>=elementY&&mouseY<=elementY+this.searchField.height)
 				this.searchField.setFocused(true);
-			} else {
+			else
 				this.searchField.setFocused(false);
-			}
 		}
 		super.mouseClicked(mouseX, mouseY, mouseButton);
 	}
 
-	private Integer getSlotAt(int x, int y) {
-		int startX = this.guiLeft+8;
-		int startY = this.guiTop+18;
+	private Integer getSlotAt(final int x, final int y) {
+		final int startX = this.guiLeft+8;
+		final int startY = this.guiTop+18;
 
-		int clickedX = x-startX;
-		int clickedY = y-startY;
+		final int clickedX = x-startX;
+		final int clickedY = y-startY;
 
-		if ((clickedX>0)&&(clickedY>0)) {
-			int column = clickedX/18;
+		if (clickedX>0&&clickedY>0) {
+			final int column = clickedX/18;
 			if (column<9) {
-				int row = clickedY/18;
+				final int row = clickedY/18;
 				if (row<rowsVisible()) {
-					int slot = row*9+column+this.scrollRow*9;
+					final int slot = row*9+column+this.scrollRow*9;
 					return Integer.valueOf(slot);
 				}
 			}
@@ -265,34 +256,32 @@ public class GuiStorageCore extends GuiContainer {
 		return null;
 	}
 
+	@Override
 	public void handleMouseInput() {
 		super.handleMouseInput();
-		int i = Mouse.getEventDWheel();
+		final int i = Mouse.getEventDWheel();
 
 		if (i!=0) {
-			int j = this.tileEntity.inventory.slotCount()/9-rowsVisible()+1;
-
-			if (i>0) {
-				i = 1;
+			final int rows = (int) Math.ceil(this.tileEntity.inventory.slotCount()/9F);
+			final int max = rows-rowsVisible();
+			final float row = 1F/max;
+			if (i>0&&this.scrollRow>0) {
+				this.scrollRow--;
+				this.currentScroll = MathHelper.clamp_float(this.currentScroll-row, 0F, 1F);
+			} else if (i<0&&this.scrollRow<max) {
+				this.scrollRow++;
+				this.currentScroll = MathHelper.clamp_float(this.currentScroll+row, 0F, 1F);
 			}
-
-			if (i<0) {
-				i = -1;
-			}
-
-			this.currentScroll = ((float) (this.currentScroll-i/j));
-			this.currentScroll = MathHelper.clamp_float(this.currentScroll, 0.0F, 1.0F);
-			scrollTo(this.currentScroll);
 		}
 	}
 
-	private void scrollTo(float scroll) {
-		int i = (this.tileEntity.inventory.slotCount()+8)/9-rowsVisible();
+	private void scrollTo(final float scroll) {
+		final int i = (this.tileEntity.inventory.slotCount()+8)/9-rowsVisible();
 		int j = (int) (scroll*i+0.5D);
-		if (j<0) {
+		if (j<0)
 			j = 0;
-		}
 		this.scrollRow = j;
+		System.out.println(this.scrollRow);
 	}
 
 	protected ResourceLocation getBackground() {
