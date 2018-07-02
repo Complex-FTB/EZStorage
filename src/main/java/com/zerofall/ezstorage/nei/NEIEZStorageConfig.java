@@ -1,8 +1,9 @@
 package com.zerofall.ezstorage.nei;
 
+import com.zerofall.ezstorage.gui.GuiCraftingCore;
+
 import codechicken.nei.api.API;
 import codechicken.nei.api.IConfigureNEI;
-import com.zerofall.ezstorage.gui.GuiCraftingCore;
 
 public class NEIEZStorageConfig
 		implements IConfigureNEI {

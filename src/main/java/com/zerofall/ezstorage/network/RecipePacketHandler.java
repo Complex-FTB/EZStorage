@@ -2,15 +2,14 @@ package com.zerofall.ezstorage.network;
 
 import com.zerofall.ezstorage.container.ContainerStorageCoreCrafting;
 import com.zerofall.ezstorage.tileentity.TileEntityStorageCore;
+
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.Container;
-import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.network.NetHandlerPlayServer;
 
 public class RecipePacketHandler implements cpw.mods.fml.common.network.simpleimpl.IMessageHandler<RecipeMessage, IMessage> {
 	ItemStack[][] recipe;

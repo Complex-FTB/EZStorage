@@ -1,31 +1,28 @@
 package com.zerofall.ezstorage.gui;
 
-import com.zerofall.ezstorage.container.ContainerStorageCore;
-import com.zerofall.ezstorage.network.MyMessage;
-import com.zerofall.ezstorage.tileentity.TileEntityStorageCore;
-import com.zerofall.ezstorage.util.EZInventory;
-import com.zerofall.ezstorage.util.EZItemRenderer;
-import com.zerofall.ezstorage.util.ItemGroup;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import net.minecraft.client.Minecraft;
+
+import org.lwjgl.input.Mouse;
+
+import com.zerofall.ezstorage.container.ContainerStorageCore;
+import com.zerofall.ezstorage.network.MyMessage;
+import com.zerofall.ezstorage.tileentity.TileEntityStorageCore;
+import com.zerofall.ezstorage.util.EZItemRenderer;
+import com.zerofall.ezstorage.util.ItemGroup;
+
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.renderer.entity.RenderItem;
-import net.minecraft.client.renderer.texture.TextureManager;
-import net.minecraft.client.settings.GameSettings;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import org.lwjgl.input.Mouse;
 
 public class GuiStorageCore extends GuiContainer {
 	TileEntityStorageCore tileEntity;

@@ -1,7 +1,6 @@
 package com.zerofall.ezstorage;
 
 import net.minecraftforge.common.config.Configuration;
-import net.minecraftforge.common.config.Property;
 
 public class EZConfiguration {
 	public static int basicCapacity;

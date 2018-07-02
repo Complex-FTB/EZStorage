@@ -1,6 +1,7 @@
 package com.zerofall.ezstorage.tileentity;
 
 import com.zerofall.ezstorage.util.BlockRef;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;

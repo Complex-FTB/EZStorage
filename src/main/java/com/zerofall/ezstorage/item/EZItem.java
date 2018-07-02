@@ -1,6 +1,7 @@
 package com.zerofall.ezstorage.item;
 
 import com.zerofall.ezstorage.EZStorage;
+
 import net.minecraft.item.Item;
 
 public class EZItem extends Item {

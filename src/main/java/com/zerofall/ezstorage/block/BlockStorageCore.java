@@ -2,7 +2,7 @@ package com.zerofall.ezstorage.block;
 
 import com.zerofall.ezstorage.EZStorage;
 import com.zerofall.ezstorage.tileentity.TileEntityStorageCore;
-import com.zerofall.ezstorage.util.EZInventory;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;

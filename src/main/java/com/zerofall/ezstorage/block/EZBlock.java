@@ -1,6 +1,7 @@
 package com.zerofall.ezstorage.block;
 
 import com.zerofall.ezstorage.EZStorage;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 
