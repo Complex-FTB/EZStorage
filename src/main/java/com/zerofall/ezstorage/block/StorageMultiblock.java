@@ -56,7 +56,7 @@ public class StorageMultiblock
 
 	public TileEntityStorageCore findCore(final BlockRef br, final World world, Set<BlockRef> scanned) {
 		if (scanned==null)
-			scanned = new HashSet();
+			scanned = new HashSet<BlockRef>();
 		final List<BlockRef> neighbors = EZStorageUtils.getNeighbors(br.pos.x, br.pos.y, br.pos.z, world);
 		for (final BlockRef blockRef : neighbors)
 			if (blockRef.block instanceof StorageMultiblock) {
