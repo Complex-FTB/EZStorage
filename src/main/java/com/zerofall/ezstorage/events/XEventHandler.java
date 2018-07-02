@@ -2,21 +2,17 @@ package com.zerofall.ezstorage.events;
 
 import com.zerofall.ezstorage.tileentity.TileEntityStorageCore;
 
-import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class XEventHandler {
-
-	@SubscribeEvent
-	public void onBlockBreak(BreakEvent e) {
+	@cpw.mods.fml.common.eventhandler.SubscribeEvent
+	public void onBlockBreak(final BreakEvent e) {
 		if (!e.world.isRemote) {
-			TileEntity tileentity = e.world.getTileEntity(e.pos);
+			final net.minecraft.tileentity.TileEntity tileentity = e.world.getTileEntity(e.x, e.y, e.z);
 			if (tileentity instanceof TileEntityStorageCore) {
-				TileEntityStorageCore core = (TileEntityStorageCore)tileentity;
-				if (core.inventory.getTotalCount() > 0) {
+				final TileEntityStorageCore core = (TileEntityStorageCore) tileentity;
+				if (core.inventory.getTotalCount()>0L)
 					e.setCanceled(true);
-				}
 			}
 		}
 	}

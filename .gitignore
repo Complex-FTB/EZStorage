@@ -1,35 +1,20 @@
-#eclipse
-/bin
-/.settings
-/.classpath
-.project
-.project.swp
-.metadata*
+## .gitignore ##
+# ignore all
+*
+*/
 
-#gradle
-/build
-/.gradle
-/gradle
-gradlew
-gradlew.bat
-
-#occupational hazards
-/eclipse/
-/repo/
-/buildSrc
-/run
-/conf
-*.launch
-*Thumbs.db
-
-#Patch rejects
-*.rej
-/patches-/
-# FML changelog
-changelog.txt
-/patches_old/
-/patches_old_bak/
-*.py
-*.7z
-
-*.class
+# allow any
+!/src
+!/src/
+!/gradle
+!/gradle/
+!/lib
+!/lib/
+!/build.gradle
+!/gradle.properties
+!/gradlew
+!/gradlew.bat
+!/install.bat
+!/build.bat
+!/.gitignore
+!/LICENSE

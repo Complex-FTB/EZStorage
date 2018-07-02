@@ -1,9 +1,7 @@
 package com.zerofall.ezstorage.item;
 
-import net.minecraft.item.Item;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-
 import com.zerofall.ezstorage.EZStorage;
+import net.minecraft.item.Item;
 
 public class EZItem extends Item {
 	public EZItem(String name) {
@@ -13,6 +11,6 @@ public class EZItem extends Item {
 	public static void registerItem(String name, Item item) {
 		item.setCreativeTab(EZStorage.instance.creativeTab);
 		item.setUnlocalizedName(name);
-		GameRegistry.registerItem(item, name);
+		cpw.mods.fml.common.registry.GameRegistry.registerItem(item, name);
 	}
 }
