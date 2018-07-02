@@ -80,7 +80,6 @@ public class ContainerStorageCoreCrafting extends ContainerStorageCore {
 
 	@Override
 	public ItemStack slotClick(final int slotId, final int clickedButton, final int mode, final EntityPlayer playerIn) {
-		System.out.println(slotId);
 		if (slotId>=0&&mode==0&&clickedButton==0) {
 			final ItemStack[] recipe = new ItemStack[9];
 			for (int i = 0; i<9; i++)
