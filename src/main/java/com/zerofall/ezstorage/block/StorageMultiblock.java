@@ -41,7 +41,6 @@ public class StorageMultiblock
 	@Override
 	public void onBlockPlacedBy(final World world, final int x, final int y, final int z, final EntityLivingBase entity, final ItemStack item) {
 		attemptMultiblock(world, x, y, z, entity);
-		System.out.println(entity);
 	}
 
 	public void attemptMultiblock(final World world, final int x, final int y, final int z, final EntityLivingBase entity) {
