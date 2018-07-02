@@ -9,6 +9,8 @@ import com.zerofall.ezstorage.util.BlockRef;
 import com.zerofall.ezstorage.util.EZStorageUtils;
 
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
@@ -21,28 +23,34 @@ public class StorageMultiblock
 	@Override
 	public void onBlockDestroyedByPlayer(final World worldIn, final int x, final int y, final int z, final int metadata) {
 		super.onBlockDestroyedByPlayer(worldIn, x, y, z, metadata);
-		attemptMultiblock(worldIn, x, y, z);
+		attemptMultiblock(worldIn, x, y, z, null);
 	}
 
 	@Override
 	public void onBlockDestroyedByExplosion(final World worldIn, final int x, final int y, final int z, final Explosion explosionIn) {
 		super.onBlockDestroyedByExplosion(worldIn, x, y, z, explosionIn);
-		attemptMultiblock(worldIn, x, y, z);
+		attemptMultiblock(worldIn, x, y, z, null);
 	}
+
+	//	@Override
+	//	public void onBlockAdded(final World world, final int x, final int y, final int z) {
+	//		super.onBlockAdded(world, x, y, z);
+	//		attemptMultiblock(world, x, y, z);
+	//	}
 
 	@Override
-	public void onBlockAdded(final World world, final int x, final int y, final int z) {
-		super.onBlockAdded(world, x, y, z);
-		attemptMultiblock(world, x, y, z);
+	public void onBlockPlacedBy(final World world, final int x, final int y, final int z, final EntityLivingBase entity, final ItemStack item) {
+		attemptMultiblock(world, x, y, z, entity);
+		System.out.println(entity);
 	}
 
-	public void attemptMultiblock(final World world, final int x, final int y, final int z) {
+	public void attemptMultiblock(final World world, final int x, final int y, final int z, final EntityLivingBase entity) {
 		if (!world.isRemote)
 			if (!(this instanceof BlockStorageCore)) {
 				final BlockRef br = new BlockRef(this, x, y, z);
 				final TileEntityStorageCore core = findCore(br, world, null);
 				if (core!=null)
-					core.scanMultiblock();
+					core.scanMultiblock(entity);
 			} else {
 				TileEntityStorageCore core = (TileEntityStorageCore) world.getTileEntity(x, y, z);
 				if (core==null) {
@@ -50,7 +58,7 @@ public class StorageMultiblock
 					core = findCore(br, world, null);
 				}
 				if (core!=null)
-					core.scanMultiblock();
+					core.scanMultiblock(entity);
 			}
 	}
 

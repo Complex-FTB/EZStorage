@@ -15,7 +15,8 @@ import com.zerofall.ezstorage.util.EZInventory;
 import com.zerofall.ezstorage.util.EZStorageUtils;
 import com.zerofall.ezstorage.util.ItemGroup;
 
-import net.minecraft.client.Minecraft;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -110,14 +111,14 @@ public class TileEntityStorageCore extends TileEntity implements IUpdatePlayerLi
 		this.hasCraftBox = paramNBTTagCompound.getBoolean("hasCraftBox");
 	}
 
-	public void scanMultiblock() {
+	public void scanMultiblock(final EntityLivingBase entity) {
 		this.inventory.maxItems = 0L;
 		this.hasCraftBox = false;
 		this.hasSearchBox = false;
 		this.multiblock = new HashSet<BlockRef>();
 		final BlockRef ref = new BlockRef(this);
 		this.multiblock.add(ref);
-		getValidNeighbors(ref);
+		getValidNeighbors(ref, entity);
 		for (final BlockRef blockRef : this.multiblock)
 			if (blockRef.block instanceof BlockStorage) {
 				final BlockStorage sb = (BlockStorage) blockRef.block;
@@ -126,32 +127,33 @@ public class TileEntityStorageCore extends TileEntity implements IUpdatePlayerLi
 		this.worldObj.markBlockForUpdate(this.xCoord, this.yCoord, this.zCoord);
 	}
 
-	private void getValidNeighbors(final BlockRef br) {
+	private void getValidNeighbors(final BlockRef br, final EntityLivingBase entity) {
 		final List<BlockRef> neighbors = EZStorageUtils.getNeighbors(br.pos.x, br.pos.y, br.pos.z, this.worldObj);
 		for (final BlockRef blockRef : neighbors)
 			if (
 				blockRef.block instanceof StorageMultiblock&&
-						this.multiblock.add(blockRef)==true&&validateSystem()==true
+						this.multiblock.add(blockRef)==true&&validateSystem(entity)==true
 			) {
 				if (blockRef.block instanceof com.zerofall.ezstorage.block.BlockInputPort) {
-					final TileEntityInputPort entity = (TileEntityInputPort) this.worldObj.getTileEntity(blockRef.pos.x, blockRef.pos.y, blockRef.pos.z);
-					entity.core = this;
+					final TileEntityInputPort tileEntity = (TileEntityInputPort) this.worldObj.getTileEntity(blockRef.pos.x, blockRef.pos.y, blockRef.pos.z);
+					tileEntity.core = this;
 				}
 				if (blockRef.block instanceof BlockCraftingBox)
 					this.hasCraftBox = true;
 				if (blockRef.block instanceof BlockSearchBox)
 					this.hasSearchBox = true;
-				getValidNeighbors(blockRef);
+				getValidNeighbors(blockRef, entity);
 			}
 	}
 
-	public boolean validateSystem() {
+	public boolean validateSystem(final EntityLivingBase entity) {
 		int count = 0;
 		for (final BlockRef ref : this.multiblock) {
 			if (ref.block instanceof BlockStorageCore)
 				count++;
 			if (count>1) {
-				Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentText("You can only have 1 Storage Core per system!"));
+				if (entity instanceof EntityPlayer)
+					((EntityPlayer) entity).addChatComponentMessage(new ChatComponentText("You can only have 1 Storage Core per system!"));
 				return false;
 			}
 		}
@@ -175,7 +177,7 @@ public class TileEntityStorageCore extends TileEntity implements IUpdatePlayerLi
 					this.worldObj!=null
 		) {
 			this.firstTick = true;
-			scanMultiblock();
+			scanMultiblock(null);
 		}
 	}
 
