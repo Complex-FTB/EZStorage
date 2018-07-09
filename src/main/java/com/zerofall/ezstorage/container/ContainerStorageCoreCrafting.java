@@ -85,13 +85,11 @@ public class ContainerStorageCoreCrafting extends ContainerStorageCore {
 			for (int i = 0; i<9; i++)
 				recipe[i] = this.craftMatrix.getStackInSlot(i);
 			final ItemStack result = super.slotClick(slotId, clickedButton, mode, playerIn);
-			final Slot slotObject = (Slot) this.inventorySlots.get(slotId);
-			if (
-				slotObject!=null&&
-						slotObject instanceof SlotCrafting
-			)
-				tryToPopulateCraftingGrid(recipe);
-
+			if (result!=null) {
+				final Slot slotObject = (Slot) this.inventorySlots.get(slotId);
+				if (slotObject!=null&&slotObject instanceof SlotCrafting)
+					tryToPopulateCraftingGrid(recipe);
+			}
 			return result;
 		}
 		final ItemStack result = super.slotClick(slotId, clickedButton, mode, playerIn);
