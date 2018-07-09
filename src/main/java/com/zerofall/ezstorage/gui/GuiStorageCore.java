@@ -18,6 +18,7 @@ import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.MathHelper;
@@ -81,7 +82,7 @@ public class GuiStorageCore extends GuiContainer {
 	protected void drawGuiContainerForegroundLayer(final int mouseX, final int mouseY) {
 		super.drawGuiContainerForegroundLayer(mouseX, mouseY);
 		handleScrolling(mouseX, mouseY);
-		updateFilteredItems();
+		//		updateFilteredItems();
 		this.fontRendererObj.drawString(this.tileEntity.inventory.getTotalCount()+"/"+this.tileEntity.inventory.maxItems, 125, 6, 4210752);
 		int x = 8;
 		int y = 18;
@@ -134,9 +135,9 @@ public class GuiStorageCore extends GuiContainer {
 		super.drawScreen(mouseX, mouseY, partialTicks);
 		final Integer slot = getSlotAt(mouseX, mouseY);
 		if (slot!=null) {
-			int mode = 0;
-			if (GuiScreen.isShiftKeyDown())
-				mode = 1;
+			//			int mode = 0;
+			//			if (GuiScreen.isShiftKeyDown())
+			//				mode = 1;
 			int index = this.tileEntity.inventory.slotCount();
 			if (slot.intValue()<this.filteredList.size()) {
 				final ItemGroup group = this.filteredList.get(slot.intValue());
@@ -234,6 +235,12 @@ public class GuiStorageCore extends GuiContainer {
 				this.searchField.setFocused(false);
 		}
 		super.mouseClicked(mouseX, mouseY, mouseButton);
+	}
+
+	@Override
+	protected void handleMouseClick(final Slot p_146984_1_, final int p_146984_2_, final int p_146984_3_, final int p_146984_4_) {
+		super.handleMouseClick(p_146984_1_, p_146984_2_, p_146984_3_, p_146984_4_);
+		updateFilteredItems();
 	}
 
 	private Integer getSlotAt(final int x, final int y) {
