@@ -1,7 +1,6 @@
 package com.zerofall.ezstorage.gui;
 
 import com.zerofall.ezstorage.container.ContainerStorageCoreCrafting;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;

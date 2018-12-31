@@ -2,7 +2,6 @@ package com.zerofall.ezstorage.gui;
 
 import com.zerofall.ezstorage.container.ContainerStorageCore;
 import com.zerofall.ezstorage.container.ContainerStorageCoreCrafting;
-
 import cpw.mods.fml.common.network.IGuiHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;

@@ -1,9 +1,9 @@
 package com.zerofall.ezstorage.util;
 
+import net.minecraft.world.World;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import net.minecraft.world.World;
 
 public class EZStorageUtils {
 	public static List<BlockRef> getNeighbors(final int xCoord, final int yCoord, final int zCoord, final World world) {

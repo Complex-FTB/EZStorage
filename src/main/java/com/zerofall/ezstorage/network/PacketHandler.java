@@ -1,7 +1,6 @@
 package com.zerofall.ezstorage.network;
 
 import com.zerofall.ezstorage.container.ContainerStorageCore;
-
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;

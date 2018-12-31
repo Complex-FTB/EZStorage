@@ -1,10 +1,10 @@
 package com.zerofall.ezstorage.util;
 
+import net.minecraft.item.ItemStack;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import net.minecraft.item.ItemStack;
 
 public class EZInventory {
 	public List<ItemGroup> inventory;

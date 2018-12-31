@@ -1,15 +1,8 @@
 package com.zerofall.ezstorage.init;
 
-import com.zerofall.ezstorage.block.BlockCondensedStorage;
-import com.zerofall.ezstorage.block.BlockCraftingBox;
-import com.zerofall.ezstorage.block.BlockHyperStorage;
-import com.zerofall.ezstorage.block.BlockInputPort;
-import com.zerofall.ezstorage.block.BlockSearchBox;
-import com.zerofall.ezstorage.block.BlockStorage;
-import com.zerofall.ezstorage.block.BlockStorageCore;
+import com.zerofall.ezstorage.block.*;
 import com.zerofall.ezstorage.tileentity.TileEntityInputPort;
 import com.zerofall.ezstorage.tileentity.TileEntityStorageCore;
-
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;

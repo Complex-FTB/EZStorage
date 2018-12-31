@@ -1,20 +1,10 @@
 package com.zerofall.ezstorage.tileentity;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import com.zerofall.ezstorage.block.BlockCraftingBox;
-import com.zerofall.ezstorage.block.BlockSearchBox;
-import com.zerofall.ezstorage.block.BlockStorage;
-import com.zerofall.ezstorage.block.BlockStorageCore;
-import com.zerofall.ezstorage.block.StorageMultiblock;
+import com.zerofall.ezstorage.block.*;
 import com.zerofall.ezstorage.util.BlockRef;
 import com.zerofall.ezstorage.util.EZInventory;
 import com.zerofall.ezstorage.util.EZStorageUtils;
 import com.zerofall.ezstorage.util.ItemGroup;
-
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -27,6 +17,11 @@ import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.StatCollector;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class TileEntityStorageCore extends TileEntity implements IUpdatePlayerListBox {
 

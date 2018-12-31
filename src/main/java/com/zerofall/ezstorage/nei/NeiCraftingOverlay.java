@@ -1,21 +1,20 @@
 package com.zerofall.ezstorage.nei;
 
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-
-import com.zerofall.ezstorage.EZStorage;
-import com.zerofall.ezstorage.network.RecipeMessage;
-
 import codechicken.nei.PositionedStack;
 import codechicken.nei.api.IOverlayHandler;
 import codechicken.nei.recipe.IRecipeHandler;
+import com.zerofall.ezstorage.EZStorage;
+import com.zerofall.ezstorage.network.RecipeMessage;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
 public class NeiCraftingOverlay implements IOverlayHandler {
 	@Override

@@ -8,7 +8,6 @@ import com.zerofall.ezstorage.network.PacketHandler;
 import com.zerofall.ezstorage.network.RecipeMessage;
 import com.zerofall.ezstorage.network.RecipePacketHandler;
 import com.zerofall.ezstorage.proxy.CommonProxy;
-
 import cpw.mods.fml.client.event.ConfigChangedEvent.OnConfigChangedEvent;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;

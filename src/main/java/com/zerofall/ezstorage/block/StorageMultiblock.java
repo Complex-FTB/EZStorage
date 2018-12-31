@@ -1,18 +1,17 @@
 package com.zerofall.ezstorage.block;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import com.zerofall.ezstorage.tileentity.TileEntityStorageCore;
 import com.zerofall.ezstorage.util.BlockRef;
 import com.zerofall.ezstorage.util.EZStorageUtils;
-
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class StorageMultiblock
 		extends EZBlock {

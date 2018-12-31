@@ -1,7 +1,6 @@
 package com.zerofall.ezstorage.gui;
 
 import com.zerofall.ezstorage.EZStorage;
-
 import cpw.mods.fml.client.config.GuiConfig;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraftforge.common.config.ConfigElement;

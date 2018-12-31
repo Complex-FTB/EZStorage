@@ -1,10 +1,9 @@
 package com.zerofall.ezstorage.util;
 
-import org.lwjgl.opengl.GL11;
-
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.item.ItemStack;
+import org.lwjgl.opengl.GL11;
 
 public class EZItemRenderer extends net.minecraft.client.renderer.entity.RenderItem {
 	public void renderItemOverlayIntoGUI(final FontRenderer fr, final ItemStack stack, final int xPosition, final int yPosition, final String text) {

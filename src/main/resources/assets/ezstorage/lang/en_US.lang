@@ -10,4 +10,5 @@ itemGroup.EZStorage=EZStorage
 
 
 
-storagecore.limit.text=§cVocê só pode colocar um StorageCore por sistema!
+storagecore.limit.text=§cVocê só pode colocar um §eStorage Core§c por sistema!
+storagecore.nonemptybreak.text=§cVocê precisa esvaziar o §eStorage Core§c para quebra-lo!
