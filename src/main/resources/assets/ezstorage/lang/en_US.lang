@@ -7,3 +7,7 @@ tile.output_port.name=Output Port
 tile.crafting_box.name=Crafting Box
 tile.search_box.name=Search Box
 itemGroup.EZStorage=EZStorage
+
+
+
+storagecore.limit.text=§cVocê só pode colocar um StorageCore por sistema!

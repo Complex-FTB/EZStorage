@@ -26,6 +26,7 @@ import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.server.gui.IUpdatePlayerListBox;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.StatCollector;
 
 public class TileEntityStorageCore extends TileEntity implements IUpdatePlayerListBox {
 
@@ -153,7 +154,7 @@ public class TileEntityStorageCore extends TileEntity implements IUpdatePlayerLi
 				count++;
 			if (count>1) {
 				if (entity instanceof EntityPlayer)
-					((EntityPlayer) entity).addChatComponentMessage(new ChatComponentText("You can only have 1 Storage Core per system!"));
+				((EntityPlayer) entity).addChatComponentMessage(new ChatComponentText(StatCollector.translateToLocal("storagecore.limit.text")));
 				return false;
 			}
 		}
